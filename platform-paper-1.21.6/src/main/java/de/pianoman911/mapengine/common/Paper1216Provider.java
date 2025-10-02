@@ -12,8 +12,9 @@ import java.util.Optional;
 public final class Paper1216Provider implements IPlatformProvider {
 
     private static final IntSet SUPPORTED_PROTOCOLS = IntSet.of(
-            771,  // 1.21.6
-            772 // 1.21.7
+            771, // 1.21.6
+            772, // 1.21.7
+            773 // 1.21.9
     );
 
     @SuppressWarnings("deprecation") // bukkit unsafe
