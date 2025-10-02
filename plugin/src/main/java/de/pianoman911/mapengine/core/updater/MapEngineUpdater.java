@@ -29,7 +29,9 @@ import java.util.jar.Manifest;
 
 public final class MapEngineUpdater implements Listener {
 
-    private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
+    private static final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
+            .followRedirects(HttpClient.Redirect.NORMAL)
+            .build();
     private static final Gson GSON = new Gson();
     private static final Component PREFIX = Component.text()
             .append(Component.text('[', NamedTextColor.GRAY))
