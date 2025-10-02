@@ -4,6 +4,7 @@ import de.pianoman911.mapengine.common.data.MapUpdateData;
 import de.pianoman911.mapengine.common.platform.IListenerBridge;
 import de.pianoman911.mapengine.common.platform.IPlatform;
 import de.pianoman911.mapengine.common.platform.PacketContainer;
+import io.netty.channel.Channel;
 import io.papermc.paper.adventure.PaperAdventure;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.SharedConstants;
@@ -37,6 +38,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.map.MapCursor;
 import org.bukkit.map.MapCursorCollection;
 import org.bukkit.plugin.Plugin;
@@ -79,6 +81,19 @@ public class Paper1216Platform implements IPlatform<Packet<ClientGamePacketListe
         Paper1216Listener listener = new Paper1216Listener(event.getPlayer(), this.bridge);
         ((CraftPlayer) event.getPlayer()).getHandle().connection.connection.channel
                 .pipeline().addAfter("decoder", "mapengine", listener);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        // remove mapengine pipeline handler if the player is still connected
+        // while this event is being fired; this prevents errors if the player goes
+        // through a second configuration phase
+        Channel ch = ((CraftPlayer) event.getPlayer()).getHandle().connection.connection.channel;
+        ch.eventLoop().execute(() -> {
+            if (ch.isActive()) {
+                ch.pipeline().remove("mapengine");
+            }
+        });
     }
 
     @Override
