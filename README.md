@@ -55,6 +55,8 @@ A hosted version of the javadoc can be found [here](https://mapengine.finndohrma
 
 | Server Version | Supported |
 |----------------|-----------|
+| Paper 1.21.9   | ✔️        |
+| Paper 1.21.8   | ✔️        |
 | Paper 1.21.7   | ✔️        |
 | Paper 1.21.6   | ✔️        |
 | Paper 1.21.5   | ✔️        |
@@ -90,7 +92,7 @@ A hosted version of the javadoc can be found [here](https://mapengine.finndohrma
     <dependency>
         <groupId>de.pianoman911</groupId>
         <artifactId>mapengine-api</artifactId>
-        <version>1.8.9</version>
+        <version>1.8.10</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -111,7 +113,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'de.pianoman911:mapengine-api:1.8.9'
+    compileOnly 'de.pianoman911:mapengine-api:1.8.10'
 }
 ```
 
@@ -128,7 +130,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("de.pianoman911:mapengine-api:1.8.9")
+    compileOnly("de.pianoman911:mapengine-api:1.8.10")
 }
 ```
 
